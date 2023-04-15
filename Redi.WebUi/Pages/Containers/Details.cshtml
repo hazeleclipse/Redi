@@ -1,0 +1,176 @@
+﻿@page "{id?}"
+@model Redi.WebUi.Pages.Containers.DetailsModel
+@{
+    var parentIdString = Model.ContainerDetails.ParentId?.ToString();
+}
+
+<h1>Container Details</h1>
+<div>
+    <!-- Current container details-->
+    <dl>
+        <dt>Id</dt>
+        <dd>@Model.ContainerDetails.Id</dd>
+        <dt>Name</dt>
+        <dd>
+            @if (Model.EditContainerRequest is not null)
+            {
+                // For editing the container name
+                <form class="d-inline" method="post"
+                  asp-page-handler="save" asp-route-id="@Model.ContainerDetails.Id">
+                    <td>
+                        <input asp-for="@Model.EditContainerRequest.NewName" />
+                    </td>
+                    <button class="btn btn-success" type="submit">Save</button>
+                </form>
+                <a class="btn btn-primary" asp-page="details" asp-route-id="@Model.ContainerDetails.Id">Back</a>
+            }
+            else
+            {
+                @Model.ContainerDetails.Name
+                <a class="btn btn-primary" asp-page-handler="edit"
+               asp-route-id="@Model.ContainerDetails.Id">Edit</a>
+            }
+        </dd>
+        <dt>Parent Id</dt>
+        <dd>@(parentIdString ?? "No Parent")  
+            @if (parentIdString is not null)
+            {
+                //Button for navigating to parent contaienrs details page
+                <a class="btn btn-primary" asp-page="details" asp-route-id="@Model.ContainerDetails.ParentId">Details</a>
+            }
+        </dd>
+        <dt>Stake</dt>
+        <dd>@Decimal.Round(Model.ContainerDetails.Stake, 5)</dd>
+        <dt>Local Stake</dt>
+        <dd>@Decimal.Round(Model.ContainerDetails.LocalStake, 5)</dd>
+    </dl>
+</div>
+<hr />
+<h2>Child Containers</h2>
+<div>
+    <!-- Add new child container-->
+    <form method="post" asp-page-handler="addchild">
+        <div class="d-inline">
+            <label asp-for="@Model.AddChildContainerRequest.ChildId">ID:</label>
+            <input asp-for="@Model.AddChildContainerRequest.ChildId" />
+        </div>
+        <button class="btn btn-success" type="submit">Add</button>
+    </form>
+    <!-- Display child containers-->
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Stake</th>
+            <th>Local Stake</th>
+            <th>Weight</th>
+            <th></th>
+        </tr>
+        @foreach (var child in Model.ContainerDetails.ChildContainers)
+        {
+            <tr>
+                <td>@child.Name</td>
+                <td>@Decimal.Round(child.Stake, 5)</td>
+                <td>@Decimal.Round(child.LocalStake, 5)</td>
+                @if (Model.EditChildContainerRequest is not null && child.Id == Model.EditChildContainerRequest.ChildId)
+                {
+                    // Extra options for child row currently being edited
+                    <form id="EditChild" class="d-inline" method="post" 
+                        asp-page-handler="savechild" asp-route-id="@Model.ContainerDetails.Id">
+                        <td>
+                            <input asp-for="@Model.EditChildContainerRequest.NewWeight" />
+                        </td>
+                        <input type="hidden" asp-for="@Model.EditChildContainerRequest.ChildId" value="@child.Id"/>
+                    </form>                 
+                    <td>
+                        <button form="EditChild" class="btn btn-success" type="submit">Save</button>
+                        <a class="btn btn-primary" asp-page="details" asp-route-id="@Model.ContainerDetails.Id">Back</a>
+                        <a class="btn btn-primary" asp-page="details" asp-route-id="@child.Id">Details</a>
+                        <form method="post" class="d-inline" asp-page-handler="removechild">
+                            <input type="hidden" asp-for="@Model.RemoveChildContainerRequest.ChildId" value="@child.Id">
+                            <button class="btn btn-danger" type="submit">Remove</button>
+                        </form>
+                    </td>
+                }
+                else
+                {
+                    // Normal options dispaly for child rows
+                    <td>@child.Weight</td>
+                    <td>
+                        <div>
+                            <a class="btn btn-primary" asp-page-handler="editchild" 
+                                asp-route-id="@Model.ContainerDetails.Id" asp-route-childId="@child.Id">Edit</a>
+                            <a class="btn btn-primary" asp-page="details" asp-route-id="@child.Id">Details</a>
+                            <form method="post" class="d-inline" asp-page-handler="removechild">
+                                <input type="hidden" asp-for="@Model.RemoveChildContainerRequest.ChildId" value="@child.Id">
+                                <button class="btn btn-danger" type="submit">Remove</button>
+                            </form>
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+<hr />
+<h2>Child Stakers</h2>
+<div>
+    <!-- Add new child staker-->
+    <form method="post" asp-page-handler="addchildstaker">
+        <div class="d-inline">
+            <label asp-for="@Model.AddChildStakerRequest.StakerId">ID:</label>
+            <input asp-for="@Model.AddChildStakerRequest.StakerId" />
+        </div>
+        <button class="btn btn-success" type="submit">Add</button>
+    </form>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Stake</th>
+            <th>Local Stake</th>
+            <th>Weight</th>
+            <td></td>
+        </tr>
+        @foreach(var member in Model.ContainerDetails.Memberships)
+        {
+            <tr>
+                <td>@member.FirstName</td>
+                <td>@member.LastName</td>
+                <td>@Decimal.Round(member.Stake, 5)</td>
+                <td>@Decimal.Round(member.LocalStake, 5)</td>
+                @if(Model.EditChildStakerRequest is not null && member.Id == Model.EditChildStakerRequest.StakerId)
+                {
+                    <form id="EditChildStaker" class="d-inline" method="post"
+                        asp-page-handler="savechildstaker" asp-route-id="@Model.ContainerDetails.Id">
+                    <td>
+                        <input asp-for="@Model.EditChildStakerRequest.Weight" />
+                    </td>
+                    <input type="hidden" asp-for="@Model.EditChildStakerRequest.StakerId" value="@member.Id" />
+                    </form>
+                    <td>
+                        <button form="EditChildStaker" class="btn btn-success" type="submit">Save</button>
+                        <a class="btn btn-primary" asp-page="details" asp-route-id="@Model.ContainerDetails.Id">Back</a>
+                        <a class="btn btn-primary" asp-page="/Stakers/Details" asp-route-id="@member.Id">Details</a>
+                        <form method="post" class="d-inline" asp-page-handler="removechildstaker">
+                            <input type="hidden" asp-for="@Model.RemoveChildStakerRequest.StakerId" value="@member.Id">
+                            <button class="btn btn-danger" type="submit">Remove</button>
+                        </form>
+                    </td>
+                }
+                else
+                {
+                    <td>@member.Weight</td>
+                    <td>
+                        <a class="btn btn-primary" asp-page-handler="editchildstaker" asp-route-id="@Model.ContainerDetails.Id" 
+                            asp-route-stakerId="@member.Id">Edit</a>
+                        <a class="btn btn-primary" asp-page="/Stakers/Details" asp-route-id="@member.Id">Details</a>
+                        <form method="post" class="d-inline" asp-page-handler="removechildstaker">
+                            <input type="hidden" asp-for="@Model.RemoveChildStakerRequest.StakerId" value="@member.Id">
+                            <button class="btn btn-danger" type="submit">Remove</button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>

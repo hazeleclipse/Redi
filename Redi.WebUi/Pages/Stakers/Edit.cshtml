@@ -1,0 +1,28 @@
+﻿@page "{id?}"
+@model Redi.WebUi.Pages.Stakers.EditModel
+@{
+}
+
+<h1>Edit Staker</h1>
+<div>
+    <form method="post">
+        <div>
+            <label asp-for="@Model.UpdateRequest.Email">Email</label>
+            <input type="email" asp-for="@Model.UpdateRequest.Email" />
+        </div>
+        <div>
+            <label asp-for="@Model.UpdateRequest.FirstName">First Name</label>
+            <input type="text" asp-for="@Model.UpdateRequest.FirstName" />
+        </div>
+        <div>
+            <label asp-for="@Model.UpdateRequest.LastName">Last Name</label>
+            <input type="text" asp-for="@Model.UpdateRequest.LastName" />
+        </div>
+        <div>
+            <label asp-for="@Model.UpdateRequest.Role">Role</label>
+            <input type="text" asp-for="@Model.UpdateRequest.Role" />
+        </div>
+        <button class="btn btn-success" type="submit">Save</button>
+        <a class="btn btn-primary" asp-page="./details" asp-route-id="@Model.UpdateRequest.Id">Back</a>
+    </form>
+</div>

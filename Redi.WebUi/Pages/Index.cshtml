@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>Admin Home</h1>
+<div>
+    <form method="post" asp-page-handler="CreateProfit">
+        <div>
+            <label asp-for="CreateDailyProfitRequest.Date">Date</label>
+            <input type="date" asp-for="CreateDailyProfitRequest.Date" />
+        </div>
+        <div>
+            <label asp-for="CreateDailyProfitRequest.Profit">Profit</label>
+            <input asp-for="CreateDailyProfitRequest.Profit" />
+        </div>
+        <button type="submit">Save</button>
+    </form>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Profit</th>
+        </tr>
+        @foreach( var companyProfit in Model.DailyCompanyProfits)
+        {
+            <tr>
+                <td>@companyProfit.Date</td>
+                <td>@companyProfit.Profit.Value.ToString("C")</td>
+            </tr>
+        }
+    </table>
+</div>
