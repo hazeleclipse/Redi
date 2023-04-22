@@ -1,31 +1,42 @@
 ﻿@page
 @model Redi.WebUi.Pages.Stakers.RegisterModel
 @{
+    ViewData["Title"] = "Register User";
 }
 
 <h1>Register</h1>
 <div>
     <form method="post">
-        <div>
-            <label asp-for="RegisterRequest.Email">Email</label>
-            <input type="email" asp-for="RegisterRequest.Email"/>
+        <div class="form-group row mt-1">           
+            <label class="col-form-label col-2" asp-for="RegisterRequest.Email">Email</label>
+            <div class="col-4">
+                <input class="form-control" type="email" asp-for="RegisterRequest.Email" />
+            </div>
         </div>
-        <div>
-            <label asp-for="RegisterRequest.FirstName">First Name</label>
-            <input type="text" asp-for="RegisterRequest.FirstName"/>
+        <div class="form-group row mt-1">
+            <label class="col-form-label col-2" asp-for="RegisterRequest.FirstName">First Name</label>
+            <div class="col-4">
+                <input class="form-control" type="text" asp-for="RegisterRequest.FirstName" />
+            </div>            
         </div>
-        <div>
-            <label asp-for="RegisterRequest.LastName">Last Name</label>
-            <input type="text" asp-for="RegisterRequest.LastName" />
+        <div class="form-group row mt-1">
+            <label class="col-form-label col-2" asp-for="RegisterRequest.LastName">Last Name</label>
+            <div class="col-4">
+                <input class="form-control" type="text" asp-for="RegisterRequest.LastName" />
+            </div>
         </div>
-        <div>
-            <label asp-for="RegisterRequest.Password">Password</label>
-            <input type="text" asp-for="RegisterRequest.Password" />
+        <div class="form-group row mt-1">
+            <label class="col-form-label col-2" asp-for="RegisterRequest.Password">Password</label>
+            <div class="col-4">
+                <input class="form-control" type="text" asp-for="RegisterRequest.Password" />
+            </div>            
         </div>
-        <div>
-            <label asp-for="RegisterRequest.Role">Role</label>
-            <input type="text" asp-for="RegisterRequest.Role" />
+        <div class="form-group row mt-1">
+            <label class="col-form-label col-2" asp-for="RegisterRequest.Role">Role</label>
+            <div class="col-4">
+                <input class="form-control" type="text" asp-for="RegisterRequest.Role" />
+            </div>
         </div>
-        <button class="btn btn-success" type="submit">Register</button>
+        <button class="btn btn-success mt-2" type="submit">Register</button>
     </form>
 </div>
