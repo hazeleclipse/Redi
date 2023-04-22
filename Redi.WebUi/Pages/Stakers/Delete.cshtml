@@ -1,6 +1,7 @@
 ﻿@page "{id?}"
 @model Redi.WebUi.Pages.Stakers.DeleteModel
 @{
+    ViewData["Title"] = "Delete Staker";
 }
 <div>
     <dl>
@@ -14,6 +15,6 @@
         <dd>@Model.Staker.LastName</dd>
     </dl>
     <form method="post">
-        <input class="btn btn-danger" type="submit" value="Delete" />
+        <input class="btn btn-danger mt-2" type="submit" value="Delete" />
     </form>
 </div>
