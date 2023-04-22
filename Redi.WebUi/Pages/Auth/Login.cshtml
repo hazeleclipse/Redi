@@ -3,18 +3,21 @@
 @{
 }
 
-<h1>Login</h1>
 
-<div>
-    <form method="post">
-        <div>
-            <label asp-for="LoginRequest.Email">Email</label>
-            <input type="email" asp-for="LoginRequest.Email" />
-        </div>
-        <div>
-            <label asp-for="LoginRequest.Password">Password</label>
-            <input type="password" asp-for="LoginRequest.Password" />
-        </div>
-        <button type="submit">Login</button>
-    </form>
+<div class="d-flex justify-content-center">
+    <div class="w-50 login_container" style="max-width: 400px">
+        <h5 class="mb-1">Login</h5>
+        <form method="post">
+            <div class="form-group mt-1">
+                <label class="form-label mb-0" asp-for="LoginRequest.Email">Email: </label>
+                <input class="form-control" type="email" asp-for="LoginRequest.Email" placeholder="Email" />
+            </div>
+            <div class="form-group mt-1">
+                <label class="form-label mb-0" asp-for="LoginRequest.Password">Password: </label>
+                <input class="form-control" type="password" asp-for="LoginRequest.Password" placeholder="Password" />
+            </div>
+            <button class="btn btn-primary mt-2" type="submit">Login</button>
+        </form>
+    </div>
 </div>
+
