@@ -1,6 +1,7 @@
 ﻿@page "{id?}"
 @model Redi.WebUi.Pages.Stakers.DetailsModel
 @{
+    ViewData["Title"] = "Staker Details";
 }
 
 <h1>Staker Details</h1>
@@ -17,41 +18,40 @@
     </dl>
     @if (User.IsInRole("Admin"))
     {
-        <a class="btn btn-primary" asp-page="./edit" asp-route-id="@Model.StakerDetails.Id">Edit</a>
+        <a class="btn btn-primary mt-2" asp-page="./edit" asp-route-id="@Model.StakerDetails.Id">Edit</a>
     }
 </div>
 <hr />
 <h2>Current Memberships</h2>
-<div>
-    <table>
+<div class="w-75">
+    <table class="table">
         <tr>
-            <th>Container Name</th>
-            <th>Local Stake</th>
-            <th>Stake</th>
+            <th scope="col">Container Name</th>
+            <th scope="col">Local Stake</th>
+            <th scope="col">Stake</th>
         </tr>
         @foreach (var membership in Model.StakerDetails.Memberships)
         {
             <tr>
-                <td>@membership.ContainerName</td>
+                <th scope="row">@membership.ContainerName</th>
                 <td>@Decimal.Round(membership.LocalStake, 5)</td>
                 <td>@Decimal.Round(membership.Stake, 5)</td>
             </tr>
         }
     </table>
 </div>
-<hr />
 <h2>Profits</h2>
-<div>
-    <table>
+<div class="w-50">
+    <table class="table">
         <tr>
-            <th>Date</th>
-            <th>Stake</th>
-            <th>Profit</th>
+            <th scope="col">Date</th>
+            <th scope="col">Stake</th>
+            <th scope="col">Profit</th>
         </tr>
         @foreach(var profit in Model.StakerDetails.Profits)
         {
             <tr>
-                <td>@profit.Date</td>
+                <th scope="row">@profit.Date</th>
                 <td>@Decimal.Round(profit.Stake, 5)</td>
                 <td>@profit.Profit.ToString("C")</td>
             </tr>
