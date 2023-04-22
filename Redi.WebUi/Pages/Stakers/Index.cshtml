@@ -6,26 +6,26 @@
 <h1>Stakers</h1>
 <div>
     <a class="btn btn-success" asp-page="./register">Register</a>
-    <table>
+    <table class="table">
         <tr>
-            <th>Id</th>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Role</th>
-            <th></th>
+            <th scope="col">Id</th>
+            <th scope="col">Email</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Role</th>
+            <th scope="col"></th>
         </tr>
         @foreach(var staker in Model.Stakers)
         {
             <tr>
-                <td>@staker.Id</td>
+                <th scope="row">@staker.Id</th>
                 <td>@staker.Email</td>
                 <td>@staker.FirstName</td>
                 <td>@staker.LastName</td>
                 <td>@staker.Role</td>
                 <td>
-                    <a class="btn btn-primary" asp-page="./details" asp-route-id="@staker.Id">Details</a>
-                    <a class="btn btn-danger" asp-page="./delete" asp-route-id="@staker.Id">Delete</a>
+                    <a class="btn btn-primary mt-1" asp-page="./details" asp-route-id="@staker.Id">Details</a>
+                    <a class="btn btn-danger mt-1" asp-page="./delete" asp-route-id="@staker.Id">Delete</a>
                 </td>
             </tr>
         }
