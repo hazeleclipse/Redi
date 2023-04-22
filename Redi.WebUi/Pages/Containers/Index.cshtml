@@ -4,6 +4,7 @@
 }
 
 <h1>Containers</h1>
+<hr />
 <div>
 
     <form class="d-inline" method="post" asp-page-handler="create">
@@ -11,28 +12,29 @@
         <input asp-for="@Model.CreateContainerRequest.Name" />
         <button class="btn btn-success d-inline" type="submit">Create</button>
     </form>
-    <table>
+    <hr />
+    <table class="table">
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Parent Name</th>
-            <th>Stake</th>
-            <th>Local Stake</th>
-            <th></th>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Parent Name</th>
+            <th scope="col">Stake</th>
+            <th scope="col">Local Stake</th>
+            <th scope="col"></th>
         </tr>
         @foreach( var container in Model.Containers)
         {
             <tr>
-                <td>@container.Id</td>
+                <th scope="row">@container.Id</th>
                 <td>@container.Name</td>
                 <td>@(container.ParentName ?? "No Parent")</td>
                 <td>@Decimal.Round(container.Stake, 5)</td>
                 <td>@Decimal.Round(container.LocalStake, 5)</td>
                 <td>
-                    <a class="btn btn-primary" asp-page="details" asp-route-id="@container.Id">Details</a>
+                    <a class="btn btn-primary mt-1" asp-page="details" asp-route-id="@container.Id">Details</a>
                     <form class="d-inline" method="post" asp-page-handler="delete">
                         <input type="hidden" asp-for="@Model.DeleteContainerRequest.Id" value="@container.Id" />
-                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-danger mt-1" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>            
