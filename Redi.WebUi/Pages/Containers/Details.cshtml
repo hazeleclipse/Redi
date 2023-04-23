@@ -1,6 +1,7 @@
 ﻿@page "{id?}"
 @model Redi.WebUi.Pages.Containers.DetailsModel
 @{
+    ViewData["Title"] = "Container Details";
     var parentIdString = Model.ContainerDetails.ParentId?.ToString();
 }
 
@@ -50,25 +51,30 @@
 <div>
     <!-- Add new child container-->
     <form method="post" asp-page-handler="addchild">
-        <div class="d-inline">
-            <label asp-for="@Model.AddChildContainerRequest.ChildId">ID:</label>
-            <input asp-for="@Model.AddChildContainerRequest.ChildId" />
+        <div class="form-group row">
+            <label class="col-form-label col-1" asp-for="@Model.AddChildContainerRequest.ChildId">ID</label>
+            <div class="col-5">
+                <input class="form-control" asp-for="@Model.AddChildContainerRequest.ChildId" />
+            </div>         
+            <div class="col-auto">
+                <button class="btn btn-success" type="submit">Add</button>
+            </div>
         </div>
-        <button class="btn btn-success" type="submit">Add</button>
+        
     </form>
     <!-- Display child containers-->
-    <table>
+    <table class="table">
         <tr>
-            <th>Name</th>
-            <th>Stake</th>
-            <th>Local Stake</th>
-            <th>Weight</th>
-            <th></th>
+            <th scope="col">Name</th>
+            <th scope="col">Stake</th>
+            <th scope="col">Local Stake</th>
+            <th scope="col">Weight</th>
+            <th scope="col"></th>
         </tr>
         @foreach (var child in Model.ContainerDetails.ChildContainers)
         {
             <tr>
-                <td>@child.Name</td>
+                <th scope="row">@child.Name</th>
                 <td>@Decimal.Round(child.Stake, 5)</td>
                 <td>@Decimal.Round(child.LocalStake, 5)</td>
                 @if (Model.EditChildContainerRequest is not null && child.Id == Model.EditChildContainerRequest.ChildId)
@@ -111,31 +117,34 @@
         }
     </table>
 </div>
-<hr />
 <h2>Child Stakers</h2>
 <div>
     <!-- Add new child staker-->
     <form method="post" asp-page-handler="addchildstaker">
-        <div class="d-inline">
-            <label asp-for="@Model.AddChildStakerRequest.StakerId">ID:</label>
-            <input asp-for="@Model.AddChildStakerRequest.StakerId" />
-        </div>
-        <button class="btn btn-success" type="submit">Add</button>
+        <div class="form-group row">
+            <label class="col-form-label col-1" asp-for="@Model.AddChildStakerRequest.StakerId">ID</label>
+            <div class="col-5">
+                <input class="form-control" asp-for="@Model.AddChildStakerRequest.StakerId" />
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-success" type="submit">Add</button>
+            </div>
+        </div>        
     </form>
-    <table>
+    <table class="table">
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Stake</th>
-            <th>Local Stake</th>
-            <th>Weight</th>
-            <td></td>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Stake</th>
+            <th scope="col">Local Stake</th>
+            <th scope="col">Weight</th>
+            <th scope="col"></th>
         </tr>
         @foreach(var member in Model.ContainerDetails.Memberships)
         {
             <tr>
-                <td>@member.FirstName</td>
-                <td>@member.LastName</td>
+                <th scope="row">@member.FirstName</th>
+                <th scope="row">@member.LastName</th>
                 <td>@Decimal.Round(member.Stake, 5)</td>
                 <td>@Decimal.Round(member.LocalStake, 5)</td>
                 @if(Model.EditChildStakerRequest is not null && member.Id == Model.EditChildStakerRequest.StakerId)
