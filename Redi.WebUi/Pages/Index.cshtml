@@ -1,25 +1,31 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Admin Home";
 }
 
 <h1>Admin Home</h1>
 <hr />
-<div class="container w-50">
+<h2>Record Profit</h2>
+<div>    
     <form method="post" asp-page-handler="CreateProfit">
-        <div class="row mt-1">
-            <label class="form-label col-2" asp-for="CreateDailyProfitRequest.Date">Date: </label>
-            <input class="col form-control" type="date" asp-for="CreateDailyProfitRequest.Date" />
+        <div class="form-group row mt-1">
+            <label class="col-form-label col-1" asp-for="CreateDailyProfitRequest.Date">Date</label>
+            <div class="col-4">
+                <input class="form-control" type="date" asp-for="CreateDailyProfitRequest.Date" />
+            </div>            
         </div>
-        <div class="row mt-1">
-            <label class="form-label col-2" asp-for="CreateDailyProfitRequest.Profit">Profit: </label>
-            <input class="col form-control" asp-for="CreateDailyProfitRequest.Profit" />
+        <div class="form-group row mt-1">
+            <label class="col-form-label col-1" asp-for="CreateDailyProfitRequest.Profit">Profit</label>
+            <div class="col-4">
+                <input class="form-control" asp-for="CreateDailyProfitRequest.Profit" placeholder="XXXX.XX" />
+            </div>            
         </div>
-        <button class="btn btn-success mt-2" type="submit">Save</button>
+        <button class="btn btn-success mt-2" type="submit">Record</button>
     </form>
 </div>
 <hr />
+<h2>Profits</h2>
 <div class="w-50">
     <table class="table">
         <tr>
