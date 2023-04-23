@@ -1,18 +1,27 @@
 ﻿@page
 @model Redi.WebUi.Pages.Containers.IndexModel
 @{
+    ViewData["Title"] = "List Containers";
 }
 
 <h1>Containers</h1>
 <hr />
 <div>
-
     <form class="d-inline" method="post" asp-page-handler="create">
-        <label asp-for="@Model.CreateContainerRequest.Name">Name</label>
-        <input asp-for="@Model.CreateContainerRequest.Name" />
-        <button class="btn btn-success d-inline" type="submit">Create</button>
+        <div class="form-group row">
+            <label class="col-form-label col-1" asp-for="@Model.CreateContainerRequest.Name">Name</label>
+            <div class="col-4">
+                <input class="form-control" asp-for="@Model.CreateContainerRequest.Name" />
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-success" type="submit">Create</button>
+            </div>
+        </div>       
+        
     </form>
-    <hr />
+</div>
+<hr />
+<div>
     <table class="table">
         <tr>
             <th scope="col">Id</th>
@@ -22,7 +31,7 @@
             <th scope="col">Local Stake</th>
             <th scope="col"></th>
         </tr>
-        @foreach( var container in Model.Containers)
+        @foreach (var container in Model.Containers)
         {
             <tr>
                 <th scope="row">@container.Id</th>
@@ -37,7 +46,7 @@
                         <button class="btn btn-danger mt-1" type="submit">Delete</button>
                     </form>
                 </td>
-            </tr>            
+            </tr>
         }
     </table>
 </div>
