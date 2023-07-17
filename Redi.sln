@@ -5,14 +5,11 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redi.Domain", "Redi.Domain\Redi.Domain.csproj", "{3D8B1A04-CDC8-4C0C-B7A7-FE50EA304862}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redi.WebUi", "Redi.WebUi\Redi.WebUi.csproj", "{79A9DD11-9964-43EF-9320-BB5B788C4185}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4E623BE5-234A-40BE-B730-8EB8F87BE09F} = {4E623BE5-234A-40BE-B730-8EB8F87BE09F}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redi.Infrastructure", "Redi.Infrastructure\Redi.Infrastructure.csproj", "{BBF0E423-865B-4629-B6D6-2F31C2DA757E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redi.Application", "Redi.Application\Redi.Application.csproj", "{4E623BE5-234A-40BE-B730-8EB8F87BE09F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redi.MinimalApi", "Redi.MinimalApi\Redi.MinimalApi.csproj", "{CA7C2858-910D-4854-9B49-92B2AA7778D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +21,6 @@ Global
 		{3D8B1A04-CDC8-4C0C-B7A7-FE50EA304862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D8B1A04-CDC8-4C0C-B7A7-FE50EA304862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D8B1A04-CDC8-4C0C-B7A7-FE50EA304862}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79A9DD11-9964-43EF-9320-BB5B788C4185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79A9DD11-9964-43EF-9320-BB5B788C4185}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79A9DD11-9964-43EF-9320-BB5B788C4185}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79A9DD11-9964-43EF-9320-BB5B788C4185}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBF0E423-865B-4629-B6D6-2F31C2DA757E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BBF0E423-865B-4629-B6D6-2F31C2DA757E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBF0E423-865B-4629-B6D6-2F31C2DA757E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -36,6 +29,10 @@ Global
 		{4E623BE5-234A-40BE-B730-8EB8F87BE09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E623BE5-234A-40BE-B730-8EB8F87BE09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E623BE5-234A-40BE-B730-8EB8F87BE09F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA7C2858-910D-4854-9B49-92B2AA7778D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7C2858-910D-4854-9B49-92B2AA7778D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7C2858-910D-4854-9B49-92B2AA7778D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7C2858-910D-4854-9B49-92B2AA7778D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
