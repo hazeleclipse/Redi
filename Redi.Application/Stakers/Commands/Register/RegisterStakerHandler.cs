@@ -6,7 +6,7 @@ using Redi.Domain.Common.Enumerations;
 
 namespace Redi.Application.Stakers.Commands.Register
 {
-    public class RegisterStakerHandler : IRequestHandler<RegisterStaker>
+    public class RegisterStakerHandler : IRequestHandler<RegisterStaker, StakerDto>
     {
         private readonly IStakerRepository _stakerRepository;
         private readonly IRediPasswordHasher _passwordHasher;
@@ -17,7 +17,7 @@ namespace Redi.Application.Stakers.Commands.Register
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<Unit> Handle(RegisterStaker request, CancellationToken cancellationToken)
+        public async Task<StakerDto> Handle(RegisterStaker request, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
 
@@ -37,7 +37,14 @@ namespace Redi.Application.Stakers.Commands.Register
 
             _stakerRepository.Add(newStaker);
 
-            return Unit.Value;
+            var newStakerDto = new StakerDto(
+                Id: newStaker.Id,
+                Email: newStaker.Email,
+                FirstName: newStaker.FirstName,
+                LastName: newStaker.LastName,
+                Role: newStaker.Role.ToString());
+
+            return newStakerDto;
         }
     }
 }

@@ -8,5 +8,5 @@ namespace Redi.Application.Stakers.Commands.Register
         FirstName FirstName,
         LastName LastName,
         Password Password,
-        string Role ) : IRequest;
+        string Role ) : IRequest<StakerDto>;
 }
