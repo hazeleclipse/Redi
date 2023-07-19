@@ -20,7 +20,7 @@ namespace Redi.Infrastructure.Extensions
             ConfigurationManager configuration)
         {
 
-            services.AddAuth(configuration);
+            //services.AddAuth(configuration);
 
             // Services
             services.AddSingleton<IDateTimeService, DateTimeService>();
