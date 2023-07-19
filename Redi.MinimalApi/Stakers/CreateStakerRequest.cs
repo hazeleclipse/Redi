@@ -1,4 +1,4 @@
-﻿namespace Redi.MinimalApi.Dto
+﻿namespace Redi.MinimalApi.Stakers
 {
     public record CreateStakerRequest(
         string Email,
