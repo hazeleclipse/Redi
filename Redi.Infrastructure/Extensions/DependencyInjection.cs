@@ -20,7 +20,7 @@ namespace Redi.Infrastructure.Extensions
             ConfigurationManager configuration)
         {
 
-            //services.AddAuth(configuration);
+            services.AddAuth(configuration);
 
             // Services
             services.AddSingleton<IDateTimeService, DateTimeService>();
@@ -28,7 +28,7 @@ namespace Redi.Infrastructure.Extensions
             // Repositories
             services.AddDbContext<RediDbContext>(options =>
             {
-                options.UseSqlServer("");
+                options.UseSqlServer("Server=tcp:(local);Initial Catalog=NewRediDb;Authentication=Sql Password;User=sa;Password=Germany@39;TrustServerCertificate=true");
             });
             services.AddScoped<IStakerRepository, StakerRepository>();
             services.AddScoped<IContainerRepository, ContainerRepository>();
@@ -42,7 +42,7 @@ namespace Redi.Infrastructure.Extensions
             ConfigurationManager configuration)
         {
             // For previous JWT Bearer Authentication
-            services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
+            //services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
 
             // Passwords
             services.AddScoped<IRediPasswordHasher, RediPasswordHasher>();
@@ -50,20 +50,20 @@ namespace Redi.Infrastructure.Extensions
 
 
             // Cookie Authentication
-            services.AddSingleton<IClaimsPrincipalGenerator, ClaimsPrincipalGenerator>();
-            services
-                .AddAuthentication(
-                    options => { 
-                        options.DefaultAuthenticateScheme = "access-token"; })
-                .AddCookie(
-                    "access-token", 
-                    options => {
-                        options.Cookie.Name = "access-token";
-                        options.ClaimsIssuer = "Redi";
-                        options.LoginPath = "/auth/login";
-                        options.AccessDeniedPath = "/Error";
-                        options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
-                    });
+            //services.AddSingleton<IClaimsPrincipalGenerator, ClaimsPrincipalGenerator>();
+            //services
+            //    .AddAuthentication(
+            //        options => { 
+            //            options.DefaultAuthenticateScheme = "access-token"; })
+            //    .AddCookie(
+            //        "access-token", 
+            //        options => {
+            //            options.Cookie.Name = "access-token";
+            //            options.ClaimsIssuer = "Redi";
+            //            options.LoginPath = "/auth/login";
+            //            options.AccessDeniedPath = "/Error";
+            //            options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+            //        });
 
             return services;
         }
