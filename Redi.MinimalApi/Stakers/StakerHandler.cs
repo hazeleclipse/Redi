@@ -14,7 +14,7 @@ namespace Redi.MinimalApi.Stakers
 
             var newStakerDto = await mediatr.Send(createStaker);
 
-            return TypedResults.Created(string.Empty, newStakerDto);
+            return TypedResults.Created($"/api/stakers/{newStakerDto.Id}", newStakerDto);
         }
 
         internal static async Task<IResult> DeleteStaker(Guid id, ISender mediatr)
@@ -23,7 +23,7 @@ namespace Redi.MinimalApi.Stakers
 
             await mediatr.Send(deleteStaker);
 
-            return TypedResults.Ok();
+            return TypedResults.NoContent();
         }
 
         internal static async Task<IResult> GetAllStakers(ISender mediatr)
