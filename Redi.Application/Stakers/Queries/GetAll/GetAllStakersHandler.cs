@@ -18,12 +18,7 @@ namespace Redi.Application.Stakers.Queries.GetAll
 
             _stakerRepository.GetAll().ForEach(s =>
             {
-                stakers.Add(new StakerDto(
-                    s.Id,
-                    s.Email,
-                    s.FirstName,
-                    s.LastName,
-                    s.Role.ToString()));
+                stakers.Add(new StakerDto(s.Id));
             });
 
             return stakers;
