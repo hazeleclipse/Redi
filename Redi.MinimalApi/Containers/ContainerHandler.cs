@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Redi.Application.Containers.Commands.AddChild;
 using Redi.Application.Containers.Commands.Create;
 using Redi.Application.Containers.Commands.Delete;
 using Redi.Application.Containers.Commands.Edit;
@@ -9,6 +10,15 @@ namespace Redi.MinimalApi.Containers
 {
     internal static class ContainerHandler
     {
+        internal static async Task<IResult> AddChildContainer(Guid id, Guid childId, ISender mediatr)
+        {
+            var addChildContainer = new AddChildContainer(id, childId);
+
+            await mediatr.Send(addChildContainer);
+
+            return TypedResults.Ok();
+        }
+
         internal static async Task<IResult> CreateContainer(CreateContainerRequest request, ISender mediatr)
         {
             var createContainer = new CreateContainer(Name: request.Name);
