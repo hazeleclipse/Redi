@@ -44,11 +44,6 @@ namespace Redi.Infrastructure.Extensions
             // For previous JWT Bearer Authentication
             //services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
 
-            // Passwords
-            services.AddScoped<IRediPasswordHasher, RediPasswordHasher>();
-            services.AddScoped<PasswordHasher<Staker>>();
-
-
             // Cookie Authentication
             //services.AddSingleton<IClaimsPrincipalGenerator, ClaimsPrincipalGenerator>();
             //services
