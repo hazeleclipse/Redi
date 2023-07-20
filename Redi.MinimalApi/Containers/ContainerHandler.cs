@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Redi.Application.Containers.Commands.Create;
 using Redi.Application.Containers.Queries.GetAll;
+using Redi.Application.Containers.Queries.GetDetailsById;
 
 namespace Redi.MinimalApi.Containers
 {
@@ -10,18 +11,27 @@ namespace Redi.MinimalApi.Containers
         {
             var createContainer = new CreateContainer(Name: request.Name);
 
-            var newContainerDto = await mediatr.Send(createContainer);
+            var containerDto = await mediatr.Send(createContainer);
 
-            return TypedResults.Created($"/api/containers/{newContainerDto.Id}", newContainerDto);
+            return TypedResults.Created($"/api/containers/{containerDto.Id}", containerDto);
         }
 
         internal static async Task<IResult> GetAllContainers(ISender mediatr)
         {
             var getAllContainers = new GetAllContainers();
 
-            var containers = await mediatr.Send(getAllContainers);
+            var containerDtos = await mediatr.Send(getAllContainers);
 
-            return TypedResults.Ok(containers);
+            return TypedResults.Ok(containerDtos);
+        }
+
+        internal static async Task<IResult> GetContainerById(Guid id, ISender mediatr)
+        {
+            var getContainerById = new GetContainerDetailsById(id);
+
+            var containerDetailsDto = await mediatr.Send(getContainerById);
+
+            return TypedResults.Ok(containerDetailsDto);
         }
     }
 }

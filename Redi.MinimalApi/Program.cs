@@ -22,5 +22,6 @@ stakers.MapDelete("/{id}", StakerHandler.DeleteStaker);
 var containers = app.MapGroup("/api/containers");
 containers.MapGet("/", ContainerHandler.GetAllContainers);
 containers.MapPost("/", ContainerHandler.CreateContainer);
+containers.MapGet("/{id}", ContainerHandler.GetContainerById);
 
 app.Run();
