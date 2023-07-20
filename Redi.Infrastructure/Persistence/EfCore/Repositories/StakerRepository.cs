@@ -34,11 +34,6 @@ namespace Redi.Infrastructure.Persistence.EfCore.Repositories
             return _rediDbContext.Stakers.ToList();
         }
 
-        public Staker? GetByEmail(string email)
-        {
-            return _rediDbContext.Stakers.Where(s => s.Email == email).FirstOrDefault();
-        }
-
         public Staker? GetById(StakerId id)
         {
             return _rediDbContext.Stakers.Find(id);
@@ -54,12 +49,6 @@ namespace Redi.Infrastructure.Persistence.EfCore.Repositories
                     returnList.Add(staker);
             }
             return returnList;
-        }
-
-        public void Update(Staker staker)
-        {
-            _rediDbContext.Stakers.Update(staker);
-            _rediDbContext.SaveChanges();
         }
     }
 }

@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure();
 
 var app = builder.Build();
 
@@ -15,7 +15,6 @@ var stakers = app.MapGroup("/api/stakers");
 stakers.MapGet("/", StakerHandler.GetAllStakers);
 stakers.MapPost("/", StakerHandler.CreateStaker);
 stakers.MapGet("/{id}", StakerHandler.GetStakerById);
-stakers.MapPut("/{id}", StakerHandler.UpdateStaker);
 stakers.MapDelete("/{id}", StakerHandler.DeleteStaker);
 
 // Containers

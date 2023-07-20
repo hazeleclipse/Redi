@@ -62,9 +62,6 @@ namespace Redi.Application.Stakers.Queries.GetDetailsById
             return new StakerDetailsDto
                 (
                     Id: staker.Id,
-                    FirstName: staker.FirstName,
-                    LastName: staker.LastName,
-                    Email: staker.Email,
                     Memberships: memberships,
                     Profits: profits
                 );

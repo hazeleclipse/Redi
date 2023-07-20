@@ -12,8 +12,6 @@
 
     public record MemberStakerDto(
         Guid Id,
-        string FirstName,
-        string LastName,
         decimal Stake,
         decimal LocalStake,
         ushort Weight);

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Redi.Application.Stakers.Commands.Delete;
-using Redi.Application.Stakers.Commands.Edit;
 using Redi.Application.Stakers.Commands.Register;
 using Redi.Application.Stakers.Queries.GetAll;
 using Redi.Application.Stakers.Queries.GetById;
@@ -9,18 +8,13 @@ namespace Redi.MinimalApi.Stakers
 {
     internal static class StakerHandler
     {
-        internal static async Task<IResult> CreateStaker(CreateStakerRequest request, ISender mediatr)
+        internal static async Task<IResult> CreateStaker(ISender mediatr)
         {
-            var createStaker = new RegisterStaker(
-                Email: request.Email,
-                FirstName: request.FirstName,
-                LastName: request.LastName,
-                Password: request.Password,
-                Role: request.Role);
+            var createStaker = new RegisterStaker();
 
             var newStakerDto = await mediatr.Send(createStaker);
 
-            return TypedResults.Created(string.Empty, newStakerDto);
+            return TypedResults.Created($"/api/stakers/{newStakerDto.Id}", newStakerDto);
         }
 
         internal static async Task<IResult> DeleteStaker(Guid id, ISender mediatr)
@@ -29,7 +23,7 @@ namespace Redi.MinimalApi.Stakers
 
             await mediatr.Send(deleteStaker);
 
-            return TypedResults.Ok();
+            return TypedResults.NoContent();
         }
 
         internal static async Task<IResult> GetAllStakers(ISender mediatr)
@@ -48,20 +42,6 @@ namespace Redi.MinimalApi.Stakers
             var stakerDto = await mediatr.Send(getStakerById);
 
             return TypedResults.Ok(stakerDto);
-        }
-
-        internal static async Task<IResult> UpdateStaker(Guid id, UpdateStakerRequest request, ISender mediatr)
-        {
-            var updateStakerDetails = new UpdateStakerDetails(
-                Id: id,
-                Email: request.Email,
-                FirstName: request.FirstName,
-                LastName: request.LastName,
-                Role: request.Role);
-
-            await mediatr.Send(updateStakerDetails);
-
-            return TypedResults.Ok();
         }
     }
 }

@@ -53,7 +53,7 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("42cbb7d1-f9e6-481f-a157-a34ba1f4681b"),
+                            Id = new Guid("a19be63f-a056-4ce1-bf27-05000a798bcd"),
                             LocalStake = 1m,
                             Name = "ROOT",
                             Stake = 1m,
@@ -138,30 +138,6 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Staker", (string)null);
@@ -169,12 +145,7 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("abf6128c-4ba0-4042-9fa1-8e0a7cda37a4"),
-                            Email = "admin@domain.com",
-                            FirstName = "system",
-                            LastName = "admin",
-                            Password = "$2a$11$S.06zalTVFkc/h/zqXiKOOxWMgghVgILozOnliTcObRY/y0JhzEhC",
-                            Role = "Admin"
+                            Id = new Guid("6850c5a3-361a-4f73-98fa-6eab45a00674")
                         });
                 });
 

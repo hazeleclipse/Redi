@@ -70,7 +70,7 @@ public class Container : AggregateRoot<ContainerId>
     public void AddChildStaker(Staker child)
     {
         if (_stakerMemberships.Where(sm => sm.StakerId == child.Id).Any())
-            throw new Exception($"{child.FirstName} {child.LastName} is already a member of {this.Name}");
+            throw new Exception($"Staker {child.Id} is already a member of Container {this.Id}");
 
         var membership = new StakerMembership(Guid.NewGuid(), this.Id, child.Id);
         _stakerMemberships.Add(membership);
@@ -136,7 +136,7 @@ public class Container : AggregateRoot<ContainerId>
     public void UpdateChildStakerWeight(Staker staker, Weight weight)
     {
         var sm = _stakerMemberships.Find(sm => sm.StakerId == staker.Id)
-            ?? throw new Exception("Member staker not found");
+            ?? throw new Exception($"Member Staker {staker.Id} not found");
 
         sm.Weight = weight;
 

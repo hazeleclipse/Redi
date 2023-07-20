@@ -64,12 +64,7 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
                 name: "Staker",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,12 +96,12 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
             migrationBuilder.InsertData(
                 table: "Container",
                 columns: new[] { "Id", "LocalStake", "Name", "ParentId", "Stake", "Weight" },
-                values: new object[] { new Guid("42cbb7d1-f9e6-481f-a157-a34ba1f4681b"), 1m, "ROOT", null, 1m, 1 });
+                values: new object[] { new Guid("a19be63f-a056-4ce1-bf27-05000a798bcd"), 1m, "ROOT", null, 1m, 1 });
 
             migrationBuilder.InsertData(
                 table: "Staker",
-                columns: new[] { "Id", "Email", "FirstName", "LastName", "Password", "Role" },
-                values: new object[] { new Guid("abf6128c-4ba0-4042-9fa1-8e0a7cda37a4"), "admin@domain.com", "system", "admin", "$2a$11$S.06zalTVFkc/h/zqXiKOOxWMgghVgILozOnliTcObRY/y0JhzEhC", "Admin" });
+                column: "Id",
+                value: new Guid("6850c5a3-361a-4f73-98fa-6eab45a00674"));
 
             migrationBuilder.CreateIndex(
                 name: "IX_Container_ParentId",

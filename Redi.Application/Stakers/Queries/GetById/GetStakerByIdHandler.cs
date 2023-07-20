@@ -15,14 +15,9 @@ namespace Redi.Application.Stakers.Queries.GetById
             await Task.CompletedTask;
 
             var staker = _stakerRepository.GetById(request.Id)
-                ?? throw new Exception("Staker not found.");
+                ?? throw new Exception($"Staker {request.Id} not found.");
 
-            return new StakerDto(
-                staker.Id,
-                staker.Email,
-                staker.FirstName,
-                staker.LastName,
-                staker.Role.ToString());
+            return new StakerDto(staker.Id);
         }
     }
 }
