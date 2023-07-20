@@ -51,8 +51,6 @@ namespace Redi.Application.Containers.Queries.GetDetailsById
                     members.Add(new MemberStakerDto
                         (
                             s.Id,
-                            s.FirstName,
-                            s.LastName,
                             membership.Stake,
                             membership.LocalStake,
                             membership.Weight
