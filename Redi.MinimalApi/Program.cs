@@ -15,7 +15,6 @@ var stakers = app.MapGroup("/api/stakers");
 stakers.MapGet("/", StakerHandler.GetAllStakers);
 stakers.MapPost("/", StakerHandler.CreateStaker);
 stakers.MapGet("/{id}", StakerHandler.GetStakerById);
-stakers.MapPut("/{id}", StakerHandler.UpdateStaker);
 stakers.MapDelete("/{id}", StakerHandler.DeleteStaker);
 
 // Containers
