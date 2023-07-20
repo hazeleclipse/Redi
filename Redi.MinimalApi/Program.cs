@@ -27,6 +27,7 @@ containers.MapPost("/", ContainerHandler.CreateContainer);
 
 containers.MapDelete("/{id}", ContainerHandler.DeleteContainer);
 containers.MapGet("/{id}", ContainerHandler.GetContainerById);
+containers.MapPut("/{id}", ContainerHandler.UpdateContainer);
 
 
 app.Run();

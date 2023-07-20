@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Redi.Application.Containers.Commands.Create;
 using Redi.Application.Containers.Commands.Delete;
+using Redi.Application.Containers.Commands.Edit;
 using Redi.Application.Containers.Queries.GetAll;
 using Redi.Application.Containers.Queries.GetDetailsById;
 
@@ -42,6 +43,15 @@ namespace Redi.MinimalApi.Containers
             var containerDetailsDto = await mediatr.Send(getContainerById);
 
             return TypedResults.Ok(containerDetailsDto);
+        }
+
+        internal static async Task<IResult> UpdateContainer(UpdateContainerRequest request, Guid id,  ISender mediatr)
+        {
+            var editContainer = new EditContainer(Id: id, Name: request.Name);
+            
+            await mediatr.Send(editContainer);
+
+            return TypedResults.NoContent();
         }
     }
 }
