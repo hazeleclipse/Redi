@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Redi.Application.Containers.Commands.Create;
+using Redi.Application.Containers.Commands.Delete;
 using Redi.Application.Containers.Queries.GetAll;
 using Redi.Application.Containers.Queries.GetDetailsById;
 
@@ -14,6 +15,15 @@ namespace Redi.MinimalApi.Containers
             var containerDto = await mediatr.Send(createContainer);
 
             return TypedResults.Created($"/api/containers/{containerDto.Id}", containerDto);
+        }
+
+        internal static async Task<IResult> DeleteContainer(Guid id, ISender mediatr)
+        {
+            var deleteContainer = new DeleteContainer(id);
+
+            await mediatr.Send(deleteContainer);
+
+            return TypedResults.NoContent();
         }
 
         internal static async Task<IResult> GetAllContainers(ISender mediatr)
