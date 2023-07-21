@@ -3,6 +3,7 @@ using Redi.Application.Containers.Commands.AddChild;
 using Redi.Application.Containers.Commands.Create;
 using Redi.Application.Containers.Commands.Delete;
 using Redi.Application.Containers.Commands.Edit;
+using Redi.Application.Containers.Commands.EditChild;
 using Redi.Application.Containers.Commands.RemoveChild;
 using Redi.Application.Containers.Queries.GetAll;
 using Redi.Application.Containers.Queries.GetDetailsById;
@@ -45,6 +46,15 @@ namespace Redi.MinimalApi.Containers
             await mediatr.Send(deleteContainer);
 
             return TypedResults.NoContent();
+        }
+
+        internal static async Task<IResult> EditChildContainer(Guid id, Guid childId, EditChildWeightRequest request,  ISender mediatr)
+        {
+            var editChildContainer = new EditChildContainerWeight(id, childId, request.Weight);
+
+            await mediatr.Send(editChildContainer);
+
+            return TypedResults.Ok();
         }
 
         internal static async Task<IResult> GetAllContainers(ISender mediatr)
