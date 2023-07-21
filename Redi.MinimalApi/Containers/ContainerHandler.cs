@@ -74,6 +74,15 @@ namespace Redi.MinimalApi.Containers
             return TypedResults.Ok();
         }
 
+        internal static async Task<IResult> RemoveChildStaker(Guid id, Guid childId, ISender mediatr)
+        {
+            var removeChildStaker = new RemoveChildStaker(id, childId);
+
+            await mediatr.Send(removeChildStaker);
+
+            return TypedResults.Ok();
+        }
+
         internal static async Task<IResult> UpdateContainer(UpdateContainerRequest request, Guid id,  ISender mediatr)
         {
             var editContainer = new EditContainer(Id: id, Name: request.Name);
