@@ -4,14 +4,14 @@ using Redi.Domain.Aggregates.ContainerAggregate;
 
 namespace Redi.Application.Containers.Commands.Create
 {
-    public class CreateContainerHandler : IRequestHandler<CreateContainer>
+    public class CreateContainerHandler : IRequestHandler<CreateContainer, ContainerDto>
     {
         private readonly IContainerRepository _containerRepository;
 
         public CreateContainerHandler(IContainerRepository containerRepository)
             => _containerRepository = containerRepository;        
 
-        public async Task<Unit> Handle(CreateContainer request, CancellationToken cancellationToken)
+        public async Task<ContainerDto> Handle(CreateContainer request, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
 
@@ -23,7 +23,7 @@ namespace Redi.Application.Containers.Commands.Create
             // Persist
             _containerRepository.Add(newContainer);
 
-            return Unit.Value;
+            return new(newContainer.Id, newContainer.Name);
         }
     }
 }
