@@ -57,6 +57,15 @@ namespace Redi.MinimalApi.Containers
             return TypedResults.Ok();
         }
 
+        internal static async Task<IResult> EditChildStaker(Guid id, Guid childId, EditChildWeightRequest request, ISender mediatr)
+        {
+            var editChildStaker = new EditChildStakerWeight(id, childId, request.Weight);
+
+            await mediatr.Send(editChildStaker);
+
+            return TypedResults.Ok();
+        }
+
         internal static async Task<IResult> GetAllContainers(ISender mediatr)
         {
             var getAllContainers = new GetAllContainers();

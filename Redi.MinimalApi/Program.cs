@@ -19,7 +19,6 @@ stakers.MapPost("/", StakerHandler.CreateStaker);
 stakers.MapDelete("/{id}", StakerHandler.DeleteStaker);
 stakers.MapGet("/{id}", StakerHandler.GetStakerById);
 
-
 // Containers
 var containers = app.MapGroup("/api/containers");
 containers.MapGet("/", ContainerHandler.GetAllContainers);
@@ -35,5 +34,6 @@ containers.MapPut("/{id}/containers/{childId}", ContainerHandler.EditChildContai
 
 containers.MapDelete("/{id}/stakers/{childId}", ContainerHandler.RemoveChildStaker);
 containers.MapPost("/{id}/stakers/{childId}", ContainerHandler.AddChildStaker);
+containers.MapPut("/{id}/stakers/{childId}", ContainerHandler.EditChildStaker);
 
 app.Run();
