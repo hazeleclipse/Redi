@@ -3,6 +3,7 @@ using Redi.Application.Containers.Commands.AddChild;
 using Redi.Application.Containers.Commands.Create;
 using Redi.Application.Containers.Commands.Delete;
 using Redi.Application.Containers.Commands.Edit;
+using Redi.Application.Containers.Commands.RemoveChild;
 using Redi.Application.Containers.Queries.GetAll;
 using Redi.Application.Containers.Queries.GetDetailsById;
 
@@ -62,6 +63,15 @@ namespace Redi.MinimalApi.Containers
             var containerDetailsDto = await mediatr.Send(getContainerById);
 
             return TypedResults.Ok(containerDetailsDto);
+        }
+
+        internal static async Task<IResult> RemoveChildContainer(Guid id, Guid childId, ISender mediatr)
+        {
+            var removeChildContainer = new RemoveChildContainer(id, childId);
+
+            await mediatr.Send(removeChildContainer);
+
+            return TypedResults.Ok();
         }
 
         internal static async Task<IResult> UpdateContainer(UpdateContainerRequest request, Guid id,  ISender mediatr)

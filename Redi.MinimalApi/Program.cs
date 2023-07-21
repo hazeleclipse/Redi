@@ -29,6 +29,7 @@ containers.MapDelete("/{id}", ContainerHandler.DeleteContainer);
 containers.MapGet("/{id}", ContainerHandler.GetContainerById);
 containers.MapPut("/{id}", ContainerHandler.UpdateContainer);
 
+containers.MapDelete("/{id}/containers/{childId}", ContainerHandler.RemoveChildContainer);
 containers.MapPost("/{id}/containers/{childId}", ContainerHandler.AddChildContainer);
 
 containers.MapPost("/{id}/stakers/{childId}", ContainerHandler.AddChildStaker);
