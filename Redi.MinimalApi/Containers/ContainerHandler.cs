@@ -19,6 +19,15 @@ namespace Redi.MinimalApi.Containers
             return TypedResults.Ok();
         }
 
+        internal static async Task<IResult> AddChildStaker(Guid id, Guid childId, ISender mediatr)
+        {
+            var addChildStaker = new AddChildStaker(id, childId);
+
+            await mediatr.Send(addChildStaker);
+
+            return TypedResults.Ok();
+        }
+
         internal static async Task<IResult> CreateContainer(CreateContainerRequest request, ISender mediatr)
         {
             var createContainer = new CreateContainer(Name: request.Name);

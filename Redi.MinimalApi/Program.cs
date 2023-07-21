@@ -31,5 +31,6 @@ containers.MapPut("/{id}", ContainerHandler.UpdateContainer);
 
 containers.MapPost("/{id}/containers/{childId}", ContainerHandler.AddChildContainer);
 
+containers.MapPost("/{id}/stakers/{childId}", ContainerHandler.AddChildStaker);
 
 app.Run();
