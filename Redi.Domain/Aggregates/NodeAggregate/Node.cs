@@ -4,14 +4,28 @@ using Redi.Domain.Common.ValueObjects;
 
 namespace Redi.Domain.Aggregates.NodeAggregate
 {
-    public abstract class Node : AggregateRoot<NodeId>
+    public class Node : AggregateRoot<NodeId>
     {
         public string Name { get; private set; } = default!;
-        public Node? Parent { get; private set; }
-        public Stake Stake { get; private set; } = 0;
-        public Stake LocalStake { get; private set; } = 0;
-        public Weight Weight { get; private set; } = 1;
+        public CoreNode? Parent { get; internal set; }
+        public Stake Stake { get; internal set; } = 0;
+        public Stake LocalStake { get; internal set; } = 0;
+        public Weight Weight { get; internal set; } = 1;
 
         public Node() { }
+
+        private protected Node(NodeId id, string name, CoreNode? parent) : base(id)
+        {
+            Name = name;
+            Parent = parent;
+        }
+
+        private protected Node(NodeId id, string name, CoreNode? parent,
+            Weight weight, Stake localStake, Stake stake) : this(id, name, parent)
+        {
+            Weight = weight;
+            LocalStake = localStake;
+            Stake = stake;
+        }
     }
 }
