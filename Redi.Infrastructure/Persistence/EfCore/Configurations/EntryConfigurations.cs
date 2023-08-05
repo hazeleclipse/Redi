@@ -7,7 +7,7 @@ using Redi.Domain.Common.ValueObjects;
 
 namespace Redi.Infrastructure.Persistence.EfCore.Configurations
 {
-    internal class WeightEntryConfigurations : IEntityTypeConfiguration<StakerWeightEntry>
+    internal class EntryConfigurations : IEntityTypeConfiguration<StakerWeightEntry>
     {
         public void Configure(EntityTypeBuilder<StakerWeightEntry> builder)
         {
