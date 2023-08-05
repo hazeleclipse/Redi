@@ -53,7 +53,7 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a19be63f-a056-4ce1-bf27-05000a798bcd"),
+                            Id = new Guid("6ae83006-9179-4ddd-8014-344dc25febc7"),
                             LocalStake = 1m,
                             Name = "ROOT",
                             Stake = 1m,
@@ -88,6 +88,72 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
                     b.HasIndex("StakerId");
 
                     b.ToTable("StakerMembership", (string)null);
+                });
+
+            modelBuilder.Entity("Redi.Domain.Aggregates.NodeAggregate.Entities.StakerWeightEntry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("LocalStake")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("NodeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Stake")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("StakerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<ushort>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NodeId");
+
+                    b.HasIndex("StakerId");
+
+                    b.ToTable("StakerWeightEntry", (string)null);
+                });
+
+            modelBuilder.Entity("Redi.Domain.Aggregates.NodeAggregate.Node", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("LocalStake")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Stake")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<ushort>("Weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Node", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Node");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Redi.Domain.Aggregates.ProfitLedgerAggregate.Entities.DailyCompanyProfitEntry", b =>
@@ -145,8 +211,26 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6850c5a3-361a-4f73-98fa-6eab45a00674")
+                            Id = new Guid("0d4150e5-f108-4a11-b278-fbcd2bba44b0")
                         });
+                });
+
+            modelBuilder.Entity("Redi.Domain.Aggregates.NodeAggregate.ByWeightNode", b =>
+                {
+                    b.HasBaseType("Redi.Domain.Aggregates.NodeAggregate.Node");
+
+                    b.ToTable("Node", (string)null);
+
+                    b.HasDiscriminator().HasValue("ByWeightNode");
+                });
+
+            modelBuilder.Entity("Redi.Domain.Aggregates.NodeAggregate.CoreNode", b =>
+                {
+                    b.HasBaseType("Redi.Domain.Aggregates.NodeAggregate.Node");
+
+                    b.ToTable("Node", (string)null);
+
+                    b.HasDiscriminator().HasValue("CoreNode");
                 });
 
             modelBuilder.Entity("Redi.Domain.Aggregates.ContainerAggregate.Container", b =>
@@ -167,11 +251,39 @@ namespace Redi.Infrastructure.Persistence.EfCore.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Redi.Domain.Aggregates.NodeAggregate.Entities.StakerWeightEntry", b =>
+                {
+                    b.HasOne("Redi.Domain.Aggregates.NodeAggregate.ByWeightNode", null)
+                        .WithMany("Weights")
+                        .HasForeignKey("NodeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Redi.Domain.Aggregates.NodeAggregate.Node", b =>
+                {
+                    b.HasOne("Redi.Domain.Aggregates.NodeAggregate.CoreNode", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("Redi.Domain.Aggregates.ContainerAggregate.Container", b =>
                 {
                     b.Navigation("ChildContainers");
 
                     b.Navigation("Memberships");
+                });
+
+            modelBuilder.Entity("Redi.Domain.Aggregates.NodeAggregate.ByWeightNode", b =>
+                {
+                    b.Navigation("Weights");
+                });
+
+            modelBuilder.Entity("Redi.Domain.Aggregates.NodeAggregate.CoreNode", b =>
+                {
+                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }
