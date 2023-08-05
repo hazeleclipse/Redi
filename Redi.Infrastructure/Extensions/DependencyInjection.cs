@@ -25,6 +25,7 @@ namespace Redi.Infrastructure.Extensions
             services.AddScoped<IStakerRepository, StakerRepository>();
             services.AddScoped<IContainerRepository, ContainerRepository>();
             services.AddScoped<IProfitLedgerRepository, ProfitLedgerRepository>();
+            services.AddScoped<INodeRepository, NodeRepository>();
 
             return services;
         }
