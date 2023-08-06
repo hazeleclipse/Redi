@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Redi.Infrastructure.Persistence.EfCore;
 
@@ -11,9 +12,11 @@ using Redi.Infrastructure.Persistence.EfCore;
 namespace Redi.Infrastructure.Persistence.EfCore.Migrations
 {
     [DbContext(typeof(RediDbContext))]
-    partial class RediDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230726210534_AddNodes")]
+    partial class AddNodes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

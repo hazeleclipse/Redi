@@ -1,6 +1,7 @@
 using Redi.Application.Extensions;
 using Redi.Infrastructure.Extensions;
 using Redi.MinimalApi.Containers;
+using Redi.MinimalApi.Nodes;
 using Redi.MinimalApi.Stakers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,5 +36,10 @@ containers.MapPut("/{id}/containers/{childId}", ContainerHandler.EditChildContai
 containers.MapDelete("/{id}/stakers/{childId}", ContainerHandler.RemoveChildStaker);
 containers.MapPost("/{id}/stakers/{childId}", ContainerHandler.AddChildStaker);
 containers.MapPut("/{id}/stakers/{childId}", ContainerHandler.EditChildStaker);
+
+// Nodes
+var nodes = app.MapGroup("/api/nodes");
+nodes.MapGet("/", NodeHanlder.GetAllNodes);
+nodes.MapPost("/", NodeHanlder.CreateNode);
 
 app.Run();
