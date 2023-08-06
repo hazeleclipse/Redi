@@ -39,7 +39,7 @@ namespace Redi.Application.Nodes.Commands.Create
             // Persist
             _nodeRepository.Add(newNode);
 
-            return new(newNode.Id, newNode.Name, newNode.GetType().ToString());
+            return new(newNode.Id, newNode.Name, newNode.GetType().Name);
         }
     }
 }
