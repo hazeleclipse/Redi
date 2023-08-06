@@ -19,5 +19,10 @@ namespace Redi.Infrastructure.Persistence.EfCore.Repositories
 
             _rediDbContext.SaveChanges();
         }
+
+        public List<Node> GetAll()
+        {
+            return _rediDbContext.Nodes.ToList();
+        }
     }
 }
