@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Redi.Application.Common.Interfaces.Services;
 using Redi.Application.Persistence;
@@ -11,7 +12,7 @@ namespace Redi.Infrastructure.Extensions
     public static class DependencyInjection
     {
         public static IServiceCollection AddInfrastructure(
-            this IServiceCollection services)
+            this IServiceCollection services, IConfiguration configuration)
         {
 
             // Services
@@ -20,7 +21,7 @@ namespace Redi.Infrastructure.Extensions
             // Repositories
             services.AddDbContext<RediDbContext>(options =>
             {
-                options.UseSqlServer("Server=tcp:(local);Initial Catalog=NewRediDb;Authentication=Sql Password;User=sa;Password=Germany@39;TrustServerCertificate=true");
+                options.UseSqlServer("name=Sql:ConnectionString");
             });
             services.AddScoped<IStakerRepository, StakerRepository>();
             services.AddScoped<IContainerRepository, ContainerRepository>();

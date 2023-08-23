@@ -6,9 +6,11 @@ using Redi.MinimalApi.Stakers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration;
+
 builder.Services
     .AddApplication()
-    .AddInfrastructure();
+    .AddInfrastructure(configuration);
 
 var app = builder.Build();
 
