@@ -44,4 +44,5 @@ var nodes = app.MapGroup("/api/nodes");
 nodes.MapGet("/", NodeHanlder.GetAllNodes);
 nodes.MapPost("/", NodeHanlder.CreateNode);
 
+nodes.MapDelete("/{id}", NodeHanlder.DeleteNode);
 app.Run();
