@@ -1,4 +1,5 @@
 ﻿using Redi.Domain.Aggregates.NodeAggregate;
+using Redi.Domain.Aggregates.NodeAggregate.ValueObjects;
 
 namespace Redi.Application.Persistence
 {
@@ -7,5 +8,7 @@ namespace Redi.Application.Persistence
         void Add(Node node);
 
         List<Node> GetAll();
+
+        void DeleteById(NodeId id);
     }
 }
