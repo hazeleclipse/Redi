@@ -1,5 +1,6 @@
 ﻿using Redi.Application.Persistence;
 using Redi.Domain.Aggregates.NodeAggregate;
+using Redi.Domain.Aggregates.NodeAggregate.ValueObjects;
 
 namespace Redi.Infrastructure.Persistence.EfCore.Repositories
 {
@@ -18,6 +19,14 @@ namespace Redi.Infrastructure.Persistence.EfCore.Repositories
             _rediDbContext.Nodes.Add(container);
 
             _rediDbContext.SaveChanges();
+        }
+
+        public void DeleteById(NodeId id)
+        {
+            var node = _rediDbContext.Nodes.Find(id)
+                ?? throw new Exception("Node not found.");
+
+           _rediDbContext.Nodes.Remove(node);
         }
 
         public List<Node> GetAll()
