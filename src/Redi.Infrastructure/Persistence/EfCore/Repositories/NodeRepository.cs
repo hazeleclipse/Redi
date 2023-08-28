@@ -33,5 +33,10 @@ namespace Redi.Infrastructure.Persistence.EfCore.Repositories
         {
             return _rediDbContext.Nodes.ToList();
         }
+
+        public Node? GetById(NodeId id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
