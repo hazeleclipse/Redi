@@ -10,5 +10,7 @@ namespace Redi.Application.Persistence
         List<Node> GetAll();
 
         void DeleteById(NodeId id);
+        
+        Node? GetById(NodeId id);
     }
 }
