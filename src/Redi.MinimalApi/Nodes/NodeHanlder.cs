@@ -1,7 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Redi.Application.Nodes.Commands.Create;
 using Redi.Application.Nodes.Commands.Delete;
 using Redi.Application.Nodes.Queries.GetAll;
+using Redi.Application.Nodes.Queries.GetById;
 
 namespace Redi.MinimalApi.Nodes
 {
@@ -32,6 +34,17 @@ namespace Redi.MinimalApi.Nodes
             var nodeDtos = await mediatr.Send(getAllNodes);
 
             return TypedResults.Ok(nodeDtos);
+        }
+
+        internal static async Task<Results<Ok<Application.Nodes.Queries.GetById.NodeDto>, NotFound>> GetById(Guid id, ISender mediatr)
+        {
+            var getNodeById = new GetNodeById(id);
+            
+            var nodeDto = await mediatr.Send(getNodeById, CancellationToken.None);
+
+            if (nodeDto is null) return TypedResults.NotFound();
+
+            return TypedResults.Ok(nodeDto);
         }
     }
 }
