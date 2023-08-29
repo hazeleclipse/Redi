@@ -1,6 +1,4 @@
-using MediatR;
 using Moq;
-using Redi.Application.Nodes.Queries.GetAll;
 using Redi.Application.Nodes.Queries.GetById;
 using Redi.Application.Persistence;
 using Redi.Domain.Aggregates.NodeAggregate;
@@ -14,7 +12,7 @@ public class NodeQueryTests
     {
         // Arrange
         var id = Guid.NewGuid();
-        INodeRepository mockRepository = null;
+        INodeRepository? mockRepository = null;
         var getNodeById = new GetNodeById(id);
 
         // Act & Assert
