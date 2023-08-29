@@ -29,7 +29,7 @@ public class NodeRepositoryTests
         mockSet.As<IQueryable<Node>>().Setup(s => s.GetEnumerator()).Returns(() => data.GetEnumerator());
         mockSet
             .Setup(s => s.Find(It.IsAny<object[]>()))
-            .Returns(data.FirstOrDefault(x => x.Id == id));
+            .Returns<object[]>(d => data.FirstOrDefault(x => x.Id == (NodeId)d[0]));
 
         var mockContext = new Mock<RediDbContext>();
         mockContext.Setup(c => c.Nodes).Returns(mockSet.Object);
@@ -42,6 +42,42 @@ public class NodeRepositoryTests
         // Assert        
         Assert.NotNull(node);
         Assert.Equal(id, (Guid)node.Id);
+    }
 
+        [Fact]
+    public void GetById_EntityDoesNotExist_ReturnNull()
+    {
+        // Arrange
+        var idExists = Guid.NewGuid();
+        var idExists1 = Guid.NewGuid();
+        var idExists2 = Guid.NewGuid();
+        var idDoesNotExist = Guid.NewGuid();
+
+        var data = new List<Node>()
+        {
+            CoreNode.Create(idExists1, "From Moq 1", null),
+            CoreNode.Create(idExists2, "From Moq 2", null),
+            CoreNode.Create(idExists, "target", null),
+        }.AsQueryable();
+
+        var mockSet = new Mock<DbSet<Node>>();
+        mockSet.As<IQueryable<Node>>().Setup(s => s.Provider).Returns(data.Provider);
+        mockSet.As<IQueryable<Node>>().Setup(s => s.Expression).Returns(data.Expression);
+        mockSet.As<IQueryable<Node>>().Setup(s => s.ElementType).Returns(data.ElementType);
+        mockSet.As<IQueryable<Node>>().Setup(s => s.GetEnumerator()).Returns(() => data.GetEnumerator());
+        mockSet
+            .Setup(s => s.Find(It.IsAny<object[]>()))
+            .Returns<object[]>(d => data.FirstOrDefault(x => x.Id == (NodeId)d[0]));
+
+        var mockContext = new Mock<RediDbContext>();
+        mockContext.Setup(c => c.Nodes).Returns(mockSet.Object);
+
+        var repo = new NodeRepository(mockContext.Object);
+
+        // Act
+        var node = repo.GetById(idDoesNotExist);
+
+        // Assert        
+        Assert.Null(node);
     }
 }
