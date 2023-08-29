@@ -11,6 +11,7 @@ namespace Redi.Infrastructure.Persistence.EfCore
 {
     public class RediDbContext : DbContext
     {
+        public RediDbContext() { }
         public RediDbContext(DbContextOptions<RediDbContext> options) : base(options) { }
 
         public DbSet<ByWeightNode> ByWeightNodes { get; set; } = default!;
@@ -18,7 +19,7 @@ namespace Redi.Infrastructure.Persistence.EfCore
         public DbSet<CoreNode> CoreNodes { get; set; } = default!;
         public DbSet<DailyStakerProfitEntry> StakerProfitEntries { get; set; } = default!;
         public DbSet<Container> Containers { get; set; } = default!;
-        public DbSet<Node> Nodes { get; set; } = default!;
+        public virtual DbSet<Node> Nodes { get; set; } = default!;
         public DbSet<StakerMembership> StakerMemberships { get; set; } = default!;
         public DbSet<Staker> Stakers { get; set; } = default!;
         public DbSet<StakerWeightEntry> WeightEntries { get; set; } = default!;
