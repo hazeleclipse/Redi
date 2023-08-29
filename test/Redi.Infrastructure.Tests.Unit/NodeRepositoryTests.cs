@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Redi.Domain.Aggregates.NodeAggregate;
+using Redi.Domain.Aggregates.NodeAggregate.ValueObjects;
 using Redi.Infrastructure.Persistence.EfCore;
 using Redi.Infrastructure.Persistence.EfCore.Repositories;
 
@@ -26,6 +27,9 @@ public class NodeRepositoryTests
         mockSet.As<IQueryable<Node>>().Setup(s => s.Expression).Returns(data.Expression);
         mockSet.As<IQueryable<Node>>().Setup(s => s.ElementType).Returns(data.ElementType);
         mockSet.As<IQueryable<Node>>().Setup(s => s.GetEnumerator()).Returns(() => data.GetEnumerator());
+        mockSet
+            .Setup(s => s.Find(It.IsAny<object[]>()))
+            .Returns(data.FirstOrDefault(x => x.Id == id));
 
         var mockContext = new Mock<RediDbContext>();
         mockContext.Setup(c => c.Nodes).Returns(mockSet.Object);
@@ -35,7 +39,7 @@ public class NodeRepositoryTests
         // Act
         var node = repo.GetById(id);
 
-        // Assert
+        // Assert        
         Assert.NotNull(node);
         Assert.Equal(id, (Guid)node.Id);
 
