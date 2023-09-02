@@ -59,7 +59,7 @@ public class NodeRoutesTests
     }
 
     [Fact]
-    public async void UpdateNode_NodeExists_SendCommandAndReturnNoContent()
+    public async void UpdateNode_NodeExists_ReturnNoContent()
     {
         // Arrange
         var id = Guid.NewGuid();
@@ -77,8 +77,34 @@ public class NodeRoutesTests
         var result = await NodeHanlder.UpdateNode(id, updateNodeRequest, mockMediator.Object);
 
         // Assert
-        Assert.IsType<NoContent>(result);
-        mockMediator.Verify(m => m.Send(updateNode, CancellationToken.None), Times.Once());
+        Assert.IsType<Results<NoContent, NotFound>>(result);
+        var noContentResult = result.Result as NoContent;
+        Assert.NotNull(noContentResult);
+    }
+
+    [Fact]
+    public async void UpdateNode_NodeDoesNotExist_ReturnNotFound()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        var targetNode = CoreNode.Create(id, "target", null);
+        var updateNode = new UpdateNode(targetNode.Id , "new name");
+
+        var updateNodeRequest = new UpdateNodeRequest("new name");
+
+        var mockMediator = new Mock<ISender>();
+        mockMediator
+            .Setup(m => m.Send(updateNode, CancellationToken.None))
+            .Throws(new KeyNotFoundException($"Node {id} was not found"))
+            .Verifiable();
+
+        // Act
+        var result = await NodeHanlder.UpdateNode(id, updateNodeRequest, mockMediator.Object);
+        
+        // Assert
+        Assert.IsType<Results<NoContent, NotFound>>(result);
+        var notFoundResult = result.Result as NotFound;
+        Assert.NotNull(notFoundResult);
     }
 }
 

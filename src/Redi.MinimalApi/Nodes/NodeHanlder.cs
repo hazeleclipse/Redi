@@ -48,11 +48,18 @@ namespace Redi.MinimalApi.Nodes
             return TypedResults.Ok(nodeDto);
         }
 
-        internal static async Task<NoContent> UpdateNode(Guid id, UpdateNodeRequest request, ISender mediatr)
+        internal static async Task<Results<NoContent, NotFound>> UpdateNode(Guid id, UpdateNodeRequest request, ISender mediatr)
         {
             var updateNode = new UpdateNode(id, request.Name);
 
-            await mediatr.Send(updateNode, CancellationToken.None);
+            try
+            {
+                await mediatr.Send(updateNode, CancellationToken.None);
+            }
+            catch (KeyNotFoundException)
+            {                
+                return TypedResults.NotFound();
+            }
 
             return TypedResults.NoContent();
         }
