@@ -21,7 +21,7 @@ public class NodeRoutesTests
             .ReturnsAsync(new NodeDto(id, "Node from Moq", "NodeType"));
 
         // Act
-        var result = await NodeHanlder.GetById(id, mockMediator.Object);
+        var result = await NodeHanlder.GetNodeById(id, mockMediator.Object);
 
         // Assert
         Assert.IsType<Results<Ok<NodeDto>, NotFound>>(result);
@@ -46,7 +46,7 @@ public class NodeRoutesTests
             .ReturnsAsync((NodeDto?)null);
 
         // Act
-        var result = await NodeHanlder.GetById(id, mockMediator.Object);
+        var result = await NodeHanlder.GetNodeById(id, mockMediator.Object);
 
         // Assert
         Assert.IsType<Results<Ok<NodeDto>, NotFound>>(result);

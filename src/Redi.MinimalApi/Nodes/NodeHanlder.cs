@@ -36,7 +36,7 @@ namespace Redi.MinimalApi.Nodes
             return TypedResults.Ok(nodeDtos);
         }
 
-        internal static async Task<Results<Ok<Application.Nodes.Queries.GetById.NodeDto>, NotFound>> GetById(Guid id, ISender mediatr)
+        internal static async Task<Results<Ok<Application.Nodes.Queries.GetById.NodeDto>, NotFound>> GetNodeById(Guid id, ISender mediatr)
         {
             var getNodeById = new GetNodeById(id);
             
