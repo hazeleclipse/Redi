@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Redi.Domain\Redi.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
