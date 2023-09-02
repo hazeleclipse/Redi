@@ -39,5 +39,10 @@ namespace Redi.Infrastructure.Persistence.EfCore.Repositories
             var node = _rediDbContext.Nodes.Find(id);
             return node;
         }
+
+        public void Update(Node node)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
