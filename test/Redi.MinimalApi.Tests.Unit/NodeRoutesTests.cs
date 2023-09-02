@@ -9,7 +9,7 @@ namespace Redi.MinimalApi.Tests.Unit;
 public class NodeRoutesTests
 {
     [Fact]
-    public async void GetById_EntityExists_ReturnOkAndSpecifiedNodeDto()
+    public async void GetNodeById_EntityExists_ReturnOkAndSpecifiedNodeDto()
     {
         // Arrange
         var id = Guid.NewGuid();
@@ -34,7 +34,7 @@ public class NodeRoutesTests
     }
 
     [Fact]
-    public async void GetById_EntityDoesNotExist_ReturnNotFound()
+    public async void GetNodeById_EntityDoesNotExist_ReturnNotFound()
     {
         // Arrange
         var id = Guid.NewGuid();
