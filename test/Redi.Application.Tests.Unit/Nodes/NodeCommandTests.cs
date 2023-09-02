@@ -8,6 +8,34 @@ namespace Redi.Application.Tests.Unit;
 public class NodeCommandTests
 {
     [Fact]
+    public async void UpdateNode_EntityExists_ChangesPersisted()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        var sourceNode = CoreNode.Create(id, "source", null);
+        var targetNode = CoreNode.Create(id, "target", null);
+
+        var mockRepository = new Mock<INodeRepository>();
+        mockRepository
+            .Setup(r => r.GetById(id))
+            .Returns(targetNode);
+
+        mockRepository
+            .Setup(r => r.Update(targetNode))
+            .Verifiable();
+
+        var updateNode = new UpdateNode(id, sourceNode.Name);
+        var handler = new UpdateNodeHandler(mockRepository.Object);
+
+        // Act
+        await handler.Handle(updateNode, new CancellationToken());
+
+        // Assert
+        Assert.Equal(sourceNode.Name, targetNode.Name);
+        mockRepository.Verify(r => r.Update(targetNode), Times.Once());
+    }
+
+    [Fact]
     public async void UpdateNode_EntityDoesNotExist_ThrowsException()
     {
         // Arrange
@@ -19,7 +47,7 @@ public class NodeCommandTests
             .Setup(r => r.GetById(id))
             .Returns((Node?) null);
 
-        var updateNode = new UpdateNode(coreNode);
+        var updateNode = new UpdateNode(id, coreNode.Name);
         var handler = new UpdateNodeHandler(mockRepository.Object);
 
         // Act & Assert

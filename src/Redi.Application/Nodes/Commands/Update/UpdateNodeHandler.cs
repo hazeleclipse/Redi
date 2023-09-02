@@ -16,8 +16,12 @@ public class UpdateNodeHandler : IRequestHandler<UpdateNode>
     {
         await Task.CompletedTask;
 
-        var currentNode = _repository.GetById(request.Node.Id)
-            ?? throw new KeyNotFoundException($"Node {request.Node.Id} does not exist.");
+        var node = _repository.GetById(request.Id)
+            ?? throw new KeyNotFoundException($"Node {request.Id} does not exist.");
+
+        node.Update(request.Name);
+
+        _repository.Update(node);
 
         return Unit.Value;
     }

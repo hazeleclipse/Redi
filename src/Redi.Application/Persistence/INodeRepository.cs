@@ -12,5 +12,7 @@ namespace Redi.Application.Persistence
         List<Node> GetAll();
         
         Node? GetById(NodeId id);
+
+        void Update(Node node);
     }
 }

@@ -3,4 +3,4 @@ using Redi.Domain.Aggregates.NodeAggregate;
 
 namespace Redi.Application.Nodes.Commands.Update;
 
-public record UpdateNode(Node Node) : IRequest;
+public record UpdateNode(Guid Id, string Name) : IRequest;
