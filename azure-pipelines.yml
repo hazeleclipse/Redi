@@ -17,18 +17,23 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: 'Restore' 
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'restore'
+    projects: '$(solution)'
+    feedsToUse: 'select'
+    vstsFeed: '9155d0ab-6ef4-4765-a222-17c823273fb1'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
     command: 'build'
     projects: '$(solution)'
 
 - task: DotNetCoreCLI@2
+  displayName: "Unit Tests"
   inputs:
-    command: 'build'
-    projects: '$(solution)'
+    command: 'test'
+    projects: '**\*Tests.Unit.csproj'
+    testRunTitle: 'Unit Tests'
