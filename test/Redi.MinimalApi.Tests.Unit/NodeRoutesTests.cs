@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Moq;
@@ -8,6 +9,7 @@ using Redi.MinimalApi.Nodes;
 
 namespace Redi.MinimalApi.Tests.Unit;
 
+[ExcludeFromCodeCoverage(Justification = "Test Code")]
 public class NodeRoutesTests
 {
     [Fact]

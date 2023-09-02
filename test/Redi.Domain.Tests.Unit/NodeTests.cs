@@ -1,7 +1,9 @@
-﻿using Redi.Domain.Aggregates.NodeAggregate;
+﻿using System.Diagnostics.CodeAnalysis;
+using Redi.Domain.Aggregates.NodeAggregate;
 
 namespace Redi.Domain.Tests.Unit;
 
+[ExcludeFromCodeCoverage(Justification = "Test Code")]
 public class NodeTests
 {
 

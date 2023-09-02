@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Redi.Application.Persistence;
@@ -8,6 +9,7 @@ using Redi.Infrastructure.Persistence.EfCore.Repositories;
 
 namespace Redi.Infrastructure.Tests.Unit;
 
+[ExcludeFromCodeCoverage(Justification = "Test Code")]
 public class NodeRepositoryQueryTests
 {
 
