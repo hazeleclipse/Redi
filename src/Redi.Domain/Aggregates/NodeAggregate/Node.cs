@@ -27,5 +27,10 @@ namespace Redi.Domain.Aggregates.NodeAggregate
             LocalStake = localStake;
             Stake = stake;
         }
+
+        public void Update(string name)
+        {
+            Name = name;
+        }
     }
 }
