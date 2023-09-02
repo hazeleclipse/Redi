@@ -16,9 +16,7 @@ public class NodeQueryTests
         var getNodeById = new GetNodeById(id);
 
         // Act & Assert
-        #pragma warning disable CS8604 // Intended to be null
-        Assert.Throws<ArgumentNullException>(() => new GetNodeByIdHandler(mockRepository));
-        #pragma warning restore CS8604
+        Assert.Throws<ArgumentNullException>(() => new GetNodeByIdHandler(mockRepository!));
     }
     
     [Fact]

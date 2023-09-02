@@ -42,7 +42,23 @@ namespace Redi.Infrastructure.Persistence.EfCore.Repositories
 
         public void Update(Node node)
         {
-            throw new NotImplementedException();
+            Queue<Node> currentNodeQueue = new();
+            currentNodeQueue.Enqueue(node);
+            Node currentNode;
+
+            while (currentNodeQueue.Count > 0)
+            {
+                currentNode = currentNodeQueue.Dequeue();
+                _rediDbContext.Update(currentNode);
+
+                if (currentNode is CoreNode currentCoreNode)
+                {
+                    foreach (var child in currentCoreNode.Children)
+                        currentNodeQueue.Enqueue(child);
+                }
+
+                _rediDbContext.SaveChanges();
+            }    
         }
     }
 }
