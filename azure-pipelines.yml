@@ -1,0 +1,39 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  name: Self Hosted Pool
+  demands:
+  - Agent.Name -equals HZL-LAPTOP
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Restore' 
+  inputs:
+    command: 'restore'
+    projects: '$(solution)'
+    feedsToUse: 'select'
+    vstsFeed: '9155d0ab-6ef4-4765-a222-17c823273fb1'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: "Unit Tests"
+  inputs:
+    command: 'test'
+    projects: '**\*Tests.Unit.csproj'
+    testRunTitle: 'Unit Tests'
