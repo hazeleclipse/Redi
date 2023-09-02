@@ -30,7 +30,8 @@ namespace Redi.Domain.Aggregates.NodeAggregate
 
         public void Update(string name)
         {
-            Name = name;
+            Name = name
+                ?? throw new ArgumentNullException(nameof(name), "No arguments to the Node Update method may be null.");
         }
     }
 }

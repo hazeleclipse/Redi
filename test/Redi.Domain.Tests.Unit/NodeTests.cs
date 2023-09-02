@@ -19,4 +19,16 @@ public class NodeTests
         // Assert
         Assert.Equal(sourceNode.Name, targetNode.Name);
     }
+
+    [Fact]
+    public void Update_AnyNullArgument_ThrowsException()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        var targetNode = CoreNode.Create(id, "target", null);
+        
+
+        // Act & Assert
+        Assert.Throws<ArgumentNullException>(() => targetNode.Update(null!));
+    }
 }
