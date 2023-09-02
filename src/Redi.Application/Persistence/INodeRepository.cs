@@ -7,9 +7,9 @@ namespace Redi.Application.Persistence
     {
         void Add(Node node);
 
-        List<Node> GetAll();
-
         void DeleteById(NodeId id);
+        
+        List<Node> GetAll();
         
         Node? GetById(NodeId id);
     }
