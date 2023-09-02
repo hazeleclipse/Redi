@@ -45,7 +45,7 @@ nodes.MapGet("/", NodeHanlder.GetAllNodes);
 nodes.MapPost("/", NodeHanlder.CreateNode);
 
 nodes.MapDelete("/{id}", NodeHanlder.DeleteNode);
-nodes.MapGet("/{id}", NodeHanlder.GetById);
+nodes.MapGet("/{id}", NodeHanlder.GetNodeById);
 app.Run();
 
 public partial class Program { }
