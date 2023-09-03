@@ -8,7 +8,8 @@
           <CodeCoverage>
             <ModulePaths>
               <Exclude>
-                <!-- <Source>**/Migrations/*.cs</Source> -->
+                <!--<ModulePath>.*Migrations</ModulePath>-->
+                <Source>**/Migrations/*.cs</Source>
               </Exclude>
             </ModulePaths>
 
