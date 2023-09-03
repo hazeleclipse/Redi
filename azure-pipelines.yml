@@ -15,7 +15,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  testRunsettings: '**/*.runsettings'
+  testRunsettings: 'CodeCoverage.runsettings'
 
 steps:
 - task: DotNetCoreCLI@2
