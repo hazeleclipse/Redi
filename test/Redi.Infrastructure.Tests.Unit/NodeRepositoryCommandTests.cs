@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using Redi.Application.Persistence;
 using Redi.Domain.Aggregates.NodeAggregate;
@@ -8,6 +9,7 @@ using Redi.Infrastructure.Persistence.EfCore.Repositories;
 
 namespace Redi.Infrastructure.Tests.Unit;
 
+[ExcludeFromCodeCoverage(Justification = "Test Code")]
 public class NodeRepositoryCommandTests
 {
     private readonly INodeRepository _repository;

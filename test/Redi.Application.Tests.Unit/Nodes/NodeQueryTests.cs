@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Moq;
 using Redi.Application.Nodes.Queries.GetById;
 using Redi.Application.Persistence;
@@ -5,6 +6,7 @@ using Redi.Domain.Aggregates.NodeAggregate;
 
 namespace Redi.Application.Tests.Unit;
 
+[ExcludeFromCodeCoverage(Justification = "Test Code")]
 public class NodeQueryTests
 {
     [Fact]

@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Redi.MinimalApi.Tests.Integration;
 
+[ExcludeFromCodeCoverage(Justification = "Test Code")]
 public class NodeQueryEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _factory;
