@@ -9,7 +9,7 @@
             <ModulePaths>
               <Exclude>
                 <!--<ModulePath>.*Migrations</ModulePath>-->
-                <Source>**/Migrations/*.cs</Source>
+                <Source>.*\\Migrations\\.*\.cs</Source>
               </Exclude>
             </ModulePaths>
 
