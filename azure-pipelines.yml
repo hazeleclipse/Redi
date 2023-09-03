@@ -15,6 +15,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  testRunsettings: '**/*.runsettings'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -38,9 +39,10 @@ steps:
     command: 'test'
     projects: '**\*Tests.Unit.csproj'
     testRunTitle: 'Unit Tests'
-    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    arguments: '--configuration $(buildConfiguration) --settings $(testRunsettings) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
+  displayName: "Publish"
   inputs:
     command: publish
     publishWebProjects: True
@@ -48,6 +50,7 @@ steps:
     zipAfterPublish: True
 
 - task: PublishPipelineArtifact@1
+  displayName: "Publish to Pipeline"
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'Redi'
