@@ -1,29 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
-  <!-- Configurations that affect the Test Framework -->
-  <RunConfiguration>
-    <!-- Use 0 for maximum process-level parallelization. This does not force parallelization within the test DLL (on the thread-level). You can also change it from the Test menu; choose "Run tests in parallel". Unchecked = 1 (only 1), checked = 0 (max). -->
-    <MaxCpuCount>1</MaxCpuCount>
-    <!-- Path relative to directory that contains .runsettings file-->
-    <ResultsDirectory>.\TestResults</ResultsDirectory>
-
-    <!-- Omit the whole tag for auto-detection. -->
-    <!-- [x86] or x64, ARM, ARM64, s390x  -->
-    <!-- You can also change it from the Test menu; choose "Processor Architecture for AnyCPU Projects" -->
-    <TargetPlatform>x64</TargetPlatform>
-
-    <!-- TestCaseFilter expression -->
-    <TestCaseFilter>(TestCategory != Integration) &amp; (TestCategory != UnfinishedFeature)</TestCaseFilter>
-
-    <!-- TestSessionTimeout was introduced in Visual Studio 2017 version 15.5 -->
-    <!-- Specify timeout in milliseconds. A valid value should be greater than 0 -->
-    <TestSessionTimeout>1000000</TestSessionTimeout>
-
-    <!-- true or false -->
-    <!-- Value that specifies the exit code when no tests are discovered -->
-    <!-- <TreatNoTestsAsError>true</TreatNoTestsAsError> -->
-  </RunConfiguration>
-
   <!-- Configurations for data collectors -->
   <DataCollectionRunSettings>
     <DataCollectors>
@@ -32,7 +8,7 @@
           <CodeCoverage>
             <ModulePaths>
               <Exclude>
-                <ModulePath>*.Migrations</ModulePath>
+                <!-- <Source>**/Migrations/*.cs</Source> -->
               </Exclude>
             </ModulePaths>
 
@@ -45,11 +21,6 @@
           </CodeCoverage>
         </Configuration>
       </DataCollector>
-
-      <!-- Configuration for blame data collector -->
-      <DataCollector friendlyName="blame" enabled="True">
-      </DataCollector>
-
     </DataCollectors>
   </DataCollectionRunSettings>
 </RunSettings>
