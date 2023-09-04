@@ -9,7 +9,7 @@ trigger:
 pool:
   name: Self Hosted Pool
   demands:
-  - Agent.Name -equals HZL-LAPTOP
+  - Agent.Name -equals redi-vm
 
 variables:
   solution: '**/*.sln'
